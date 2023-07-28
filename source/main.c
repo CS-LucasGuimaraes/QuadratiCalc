@@ -1,5 +1,19 @@
 #include <stdio.h>
 
+int raise(int base, int exponent)
+{
+    if (exponent != 0)
+    {
+        for (int i = 0; i < exponent; i++)
+        {
+            base *= base;
+        }
+    }
+    else return 1;
+    if (exponent > 0) return base;
+    else if (exponent < 0) return 1/base;
+}
+
 int main()
 {
     int val0, val1, val2;
@@ -30,28 +44,24 @@ int main()
         }
         scanf("%d", &val2);
         
-        if (op2 == '+')
+        int aux1 = 1;
+        if (op1 == '-')
+            aux1 = -1;
+
+        int aux2 = 1;
+        if (op2 == '-' || op2 == '/')
+            aux2 = -1;
+
+
+        if(op2 == '+' || op2 == '-')
         {
-                 if (op1 == '+') {resultado += val0 + val1; val0 = val2;}
-            else if (op1 == '-') {resultado += val0 - val1; val0 = val2;}
-        }
-        
-        else if (op2 == '-')
-        {
-                 if (op1 == '+') {resultado += val0 + val1; val0 = -val2;}
-            else if (op1 == '-') {resultado += val0 - val1; val0 = -val2;}
+            resultado += val0 + val1*aux1; val0 = val2*aux2;
         }
 
-        else if (op2== '*')
+        else if (op2 == '*' || op2 == '/')
         {
-                 if (op1 == '+') {resultado += val0; val0 = val1*val2;}
-            else if (op1 == '-') {resultado -= val0; val0 = val1*val2;}
+        resultado = resultado + val0*aux1; val0 = val1*(raise(val2,aux2));
         }
-        else if (op2 == '/')
-        {
-                 if (op1 == '+') {resultado += val0; val0 = val1/val2;}
-            else if (op1 == '-') {resultado -= val0; val0 = val1/val2;}
-        }  
     }
     
     printf("%d", resultado);
