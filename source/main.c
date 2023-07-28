@@ -2,24 +2,30 @@
 
 int raise(int base, int exponent)
 {
-    if (exponent != 0)
+    if (exponent == 0)
+    {
+        if (base != 0) return 1;
+        else return NULL;
+    }
+
+    else
     {
         for (int i = 0; i < exponent; i++)
         {
             base *= base;
         }
     }
-    else return 1;
+
     if (exponent > 0) return base;
     else if (exponent < 0) return 1/base;
 }
 
-int main()
+float expression()
 {
     int val0, val1, val2;
-    int resultado = 0;
+    float resultado = 0;
     char op1, op2;
-    
+
     scanf("%d", &val0);
     while (1)
     {
@@ -63,7 +69,12 @@ int main()
         resultado = resultado + val0*aux1; val0 = val1*(raise(val2,aux2));
         }
     }
-    
-    printf("%d", resultado);
+    return resultado;
+}
+
+int main()
+{
+    float resultado = expression();
+    printf("O resultado da sua expressão é %f", resultado);
     return 0;
 }

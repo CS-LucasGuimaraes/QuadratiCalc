@@ -3,6 +3,15 @@
 TODAS as modificações notaveis deste projeto serão incluídas nesse documento.
 Esse projeto adere a [Versionamento Semântico 2.0.0](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.2] - 2023-07-28
+
+## Adicionado
+ - Função "expression" para realizar uma expressão algébrica de 1º grau.
+
+### Modificado
+ - Função "main" separada em várias funções menores. Compartimentalização do código.
+ - Função "raise" reajustada para 0^0 retornar NULL, não 1.
+
 ## [v0.1.1] - 2023-07-28
 
 ### Adicionado
