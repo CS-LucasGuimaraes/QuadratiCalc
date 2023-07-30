@@ -2,71 +2,78 @@
 
 int raise(int base, int exponent)
 {
-    if (exponent == 0)
-    {
-        if (base != 0) return 1;
-        else return NULL;
-    }
-
-    else
+    if (exponent > 0)
     {
         for (int i = 0; i < exponent; i++)
         {
             base *= base;
         }
+        return base;
     }
 
-    if (exponent > 0) return base;
-    else if (exponent < 0) return 1/base;
+    else if (exponent < 0)
+    {
+        for (int i = 0; -i > exponent; i--)
+        {
+            base *= base;
+        }
+        return 1/base;
+    }
+
+    else
+    {
+        if (base != 0) return 1;
+        else return 0;
+    }
+}
+
+int defineAuxiliars(char operator)
+{
+        if (operator == '+' || operator == '*') return 1;
+        return -1;
 }
 
 float expression()
 {
-    int val0, val1, val2;
+    int value0, value1, value2;
     float resultado = 0;
-    char op1, op2;
+    char operator1, operator2;
 
-    scanf("%d", &val0);
+    scanf("%d", &value0);
     while (1)
     {
-        scanf("%c", &op1);
-        if (op1 == '\n') 
+        scanf("%c", &operator1);
+        if (operator1 == '\n') 
         {
-            resultado += val0;
+            resultado += value0;
             break;
         }
 
-        scanf("%d", &val1);
+        scanf("%d", &value1);
 
-        if (op1 == '*') {resultado += val0 * val1; continue;}
-        else if (op1 == '/') {resultado += val0 / val1; continue;}
+        if (operator1 == '*') {resultado += value0 * value1; continue;}
+        else if (operator1 == '/') {resultado += value0 / value1; continue;}
         
-        scanf("%c", &op2);
-        if (op2 == '\n')
+        scanf("%c", &operator2);
+
+        int aux1 = defineAuxiliars(operator1);
+        int aux2 = defineAuxiliars(operator2);
+
+        if (operator2 == '\n')
         {
-                 if(op1 == '+') resultado += val0 + val1;
-            else if(op1 == '-') resultado += val0 - val1;
+            resultado += value0 + value1*aux1;
             break;
         }
-        scanf("%d", &val2);
-        
-        int aux1 = 1;
-        if (op1 == '-')
-            aux1 = -1;
+        scanf("%d", &value2);
 
-        int aux2 = 1;
-        if (op2 == '-' || op2 == '/')
-            aux2 = -1;
-
-
-        if(op2 == '+' || op2 == '-')
+        if(operator2 == '+' || operator2 == '-')
         {
-            resultado += val0 + val1*aux1; val0 = val2*aux2;
+            resultado += value0 + value1*aux1; value0 = value2*aux2;
         }
 
-        else if (op2 == '*' || op2 == '/')
+        else if (operator2 == '*' || operator2 == '/')
         {
-        resultado = resultado + val0*aux1; val0 = val1*(raise(val2,aux2));
+        resultado = resultado + value0*aux1; value0 = value1*(raise(value2,aux2));
         }
     }
     return resultado;

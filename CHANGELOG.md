@@ -3,9 +3,14 @@
 TODAS as modificações notaveis deste projeto serão incluídas nesse documento.
 Esse projeto adere a [Versionamento Semântico 2.0.0](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.3] - 2023-07-30
+
+### Corrigido
+ - Correção na função "raise", que não apresentava valor correto ao elevar uma base qualquer a um expoente negativo. 
+
 ## [v0.1.2] - 2023-07-28
 
-## Adicionado
+### Adicionado
  - Função "expression" para realizar uma expressão algébrica de 1º grau.
 
 ### Modificado
