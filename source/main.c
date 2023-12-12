@@ -48,32 +48,32 @@ float expression()
             resultado += value0;
             break;
         }
+        int aux1 = defineAuxiliars(operator1);
 
         scanf("%d", &value1);
 
-        if (operator1 == '*') {resultado += value0 * value1; continue;}
-        else if (operator1 == '/') {resultado += value0 / value1; continue;}
-        
-        scanf("%c", &operator2);
+        if (operator1 == '*' || operator1 == '/') {value0 += value0 * raise(value1, aux1);}
+        else{
+            printf("entrou no else");
+            scanf("%c", &operator2);
+            if (operator2 == '\n')
+            {
+                resultado += value0 + value1*aux1;
+                break;
+            }
+            int aux2 = defineAuxiliars(operator2);
 
-        int aux1 = defineAuxiliars(operator1);
-        int aux2 = defineAuxiliars(operator2);
+            scanf("%d", &value2);
 
-        if (operator2 == '\n')
-        {
-            resultado += value0 + value1*aux1;
-            break;
-        }
-        scanf("%d", &value2);
+            if(operator2 == '+' || operator2 == '-')
+            {
+                resultado += value0 + value1*aux1; value0 = value2*aux2;
+            }
 
-        if(operator2 == '+' || operator2 == '-')
-        {
-            resultado += value0 + value1*aux1; value0 = value2*aux2;
-        }
-
-        else if (operator2 == '*' || operator2 == '/')
-        {
-        resultado = resultado + value0*aux1; value0 = value1*(raise(value2,aux2));
+            else if (operator2 == '*' || operator2 == '/')
+            {
+            value0 += value0 + (value1*operator1 * raise(value2,operator2));
+            }
         }
     }
     return resultado;
@@ -81,7 +81,13 @@ float expression()
 
 int main()
 {
+    while (1)
+    {
     float resultado = expression();
     printf("O resultado da sua expressão é %f", resultado);
+    printf("\n");
+
+    }
+    
     return 0;
 }
